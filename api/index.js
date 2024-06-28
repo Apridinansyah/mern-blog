@@ -1,9 +1,12 @@
 import express from "express";
 import mongoose from "mongoose";
+import authRoutes from "./routes/auth.route.js";
 import userRoutes from "./routes/user.route.js";
 
 const app = express();
 const mongoURI = 'mongodb://localhost:27017/mern-blog';
+
+app.use(express.json());
 
 mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
@@ -21,3 +24,5 @@ app.listen(port, () => {
 
 app.use('/api/user', userRoutes)
   // console.log('Berhasil')
+
+app.use('/api/auth', authRoutes)
